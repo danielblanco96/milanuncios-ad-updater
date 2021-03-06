@@ -12,13 +12,15 @@ class MilanunciosScrapper:
         self.driver.get('https://www.milanuncios.com/mis-anuncios')
 
     def accept_cookies_if_exist(self):
-        accept_cookies_button = self.driver.find_element_by_css_selector("button[data-testid='TcfAccept']")
+        accept_cookies_button = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "button[data-testid='TcfAccept']"))
+        )
         if(accept_cookies_button is not None):
             accept_cookies_button.click()
 
     def login(self, email, password):
-        self.driver.find_element_by_css_selector("nav a").click()
-        email_input = WebDriverWait(self.driver, 10).until(
+        self.driver.find_element_by_css_selector("nav button.ma-ButtonBasic:last-child").click()
+        email_input = WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located((By.ID, "email"))
         )
         password_input = self.driver.find_element_by_id("password")
@@ -30,7 +32,7 @@ class MilanunciosScrapper:
         password_input.send_keys(Keys.RETURN)
 
     def close_popup_if_exist(self):
-        ok_button = WebDriverWait(self.driver, 10).until(
+        ok_button = WebDriverWait(self.driver, 5).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "div.ma-ModalOnboardingReserved-contentFooterButton button"))
         )
 
