@@ -1,0 +1,16 @@
+{
+    "milanuncios" : {
+        "email" :"example@email.com",
+        "password":  "example_password"
+    },
+    "notifications": {
+        "from": {
+            "email" :"example_mail@gmail.com",
+            "password":  "example_password"
+        },
+        "to": [
+            "example_mail_1@hotmail.com",
+            "example_mail_2@gmail.com"
+        ]
+    }
+}
