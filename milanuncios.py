@@ -55,7 +55,7 @@ class MilanunciosScrapper:
             self.report_result()
         except Exception as e:
             print("[", datetime.now(), "] Exception: ", e)
-            self.email_sender.send_email("Error en la actualización: ", e)
+            self.email_sender.send_email("Error en la actualización: " + e)
         if(self.current_daily_delay > self.MAXIMUM_DAILY_DELAY_IN_SECONDS):
             self.current_daily_delay = 0
         else:
