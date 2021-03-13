@@ -27,8 +27,6 @@ class EmailSender:
             self.yagmail.send(receiver, self.subject, message)
 
 class MilanunciosScrapper:
-    DAILY_DELAY_IN_SECONDS = 20
-    MAXIMUM_DAILY_DELAY_IN_SECONDS = 3600
     DEFAULT_TIMEOUT_IN_SECONDS = 10
     SCROLL_WAIT = 0.4
 
@@ -40,7 +38,6 @@ class MilanunciosScrapper:
         self.current_daily_delay = 0    
 
     def do_update(self):
-        print("[", datetime.now(), "] Execution. Current daily delay = ", self.current_daily_delay)
         time.sleep(self.current_daily_delay)
         self.number_of_updated_ads = 0
         self.number_of_already_updated_ads = 0
@@ -56,10 +53,6 @@ class MilanunciosScrapper:
         except Exception as e:
             print("[", datetime.now(), "] Exception: ", e)
             self.email_sender.send_email("Error en la actualización: " + e)
-        if(self.current_daily_delay > self.MAXIMUM_DAILY_DELAY_IN_SECONDS):
-            self.current_daily_delay = 0
-        else:
-            self.current_daily_delay += self.DAILY_DELAY_IN_SECONDS
 
     def accept_cookies_if_exist(self):
         accept_cookies_button = WebDriverWait(self.driver, self.DEFAULT_TIMEOUT_IN_SECONDS).until(
