@@ -43,7 +43,7 @@ class MilanunciosScrapper:
         self.number_of_already_updated_ads = 0
 
         try:
-            self.driver = webdriver.Chrome("./chromedriver_linux64/chromedriver", options=self.chrome_options)        
+            self.driver = webdriver.Chrome(options=self.chrome_options)        
             self.driver.get('https://www.milanuncios.com/mis-anuncios')
             self.accept_cookies_if_exist()
             self.login(self.email, self.password)
