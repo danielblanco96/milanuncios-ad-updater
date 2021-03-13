@@ -52,7 +52,7 @@ class MilanunciosScrapper:
             self.report_result()
         except Exception as e:
             print("[", datetime.now(), "] Exception: ", e)
-            self.email_sender.send_email("Error en la actualización: " + e)
+            self.email_sender.send_email("Error en la actualización: " + str(e))
 
     def accept_cookies_if_exist(self):
         accept_cookies_button = WebDriverWait(self.driver, self.DEFAULT_TIMEOUT_IN_SECONDS).until(
