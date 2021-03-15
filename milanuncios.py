@@ -39,6 +39,7 @@ class MilanunciosScrapper:
         self.current_daily_delay = 0    
 
     def do_update(self):
+        sys.stdout = open('log.txt', 'w')
         print("[", datetime.now(), "] Execution started.")
         time.sleep(self.current_daily_delay)
         self.number_of_updated_ads = 0
@@ -57,6 +58,7 @@ class MilanunciosScrapper:
             self.email_sender.send_email("Error en la actualización: " + str(e))
         finally:
             self.driver.quit()
+            sys.stdout.close()
 
     def accept_cookies_if_exist(self):
         accept_cookies_button = WebDriverWait(self.driver, self.DEFAULT_TIMEOUT_IN_SECONDS).until(
@@ -131,7 +133,6 @@ class MilanunciosScrapper:
         self.email_sender.send_email(message)
 
 def main():
-    sys.stdout = open('log.txt', 'w')
     with open('config.json', 'r') as f:
         config = json.load(f)
 
