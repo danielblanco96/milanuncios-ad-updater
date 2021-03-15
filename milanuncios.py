@@ -1,3 +1,4 @@
+import sys
 import schedule
 import time
 import json
@@ -38,6 +39,7 @@ class MilanunciosScrapper:
         self.current_daily_delay = 0    
 
     def do_update(self):
+        print("[", datetime.now(), "] Execution started.")
         time.sleep(self.current_daily_delay)
         self.number_of_updated_ads = 0
         self.number_of_already_updated_ads = 0
@@ -127,6 +129,7 @@ class MilanunciosScrapper:
         self.email_sender.send_email(message)
 
 def main():
+    sys.stdout = open('log.txt', 'w')
     with open('config.json', 'r') as f:
         config = json.load(f)
 
