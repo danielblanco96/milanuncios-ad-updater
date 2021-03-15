@@ -144,7 +144,6 @@ def main():
     milanuncios_password = config['milanuncios']['password']
     milanuncios_scrapper = MilanunciosScrapper(milanuncios_email, milanuncios_password, options, email_sender)
 
-    milanuncios_scrapper.do_update()
     schedule.every().day.at(config['updateTime']).do(milanuncios_scrapper.do_update)
 
     while True:
